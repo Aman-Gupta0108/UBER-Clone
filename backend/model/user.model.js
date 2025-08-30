@@ -23,7 +23,7 @@ const UserSchema = mongoose.Schema({
         password:{
             type:String,
             require:true,
-            select:false
+            select:false //is ka mtlb hai jb bhi user ko find kare ge to password ko leke mat jana 
         },
         socketId:{
             type:String
