@@ -32,9 +32,10 @@ const UserSchema = mongoose.Schema({
 })
 
 UserSchema.methods.generateAuthToken = function(){
-    const token = jwt.sign({_id:this._id},process.env.JWT_SECRET)
+    const token = jwt.sign({_id:this._id},process.env.JWT_SECRET,{expiresIn:'24h'})
     return token 
 }
+// method used in document level
 
 UserSchema.methods.comparePassword = async function(password){
     return await bcrypt.compare(password,this.password)
@@ -43,6 +44,7 @@ UserSchema.methods.comparePassword = async function(password){
 UserSchema.statics.hashPassword = async function (password){
     return await bcrypt.hash(password,10)
 }
+//state used at model level
 
 const userModel = mongoose.model('user',UserSchema)
 module.exports = userModel;
