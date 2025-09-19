@@ -8,9 +8,9 @@ const [userData, setUserData] = useState({})
 
 const submitHandler = (data)=>{
     setUserData({
-    username:{
-        firstname:data.firstname,
-        lastname:data.lastname,
+    userName:{
+        firstName:data.firstName,
+        lastName:data.lastName,
     },
     email:data.email,
     password:data.password
@@ -30,7 +30,7 @@ const submitHandler = (data)=>{
             <div className="flex gap-4 mb-6">
             <input
               type="text"
-              {...register('firstname')}
+              {...register('firstName')}
               required
               className="bg-[#eeeeee] w-1/2 rounded px-4 py-2 border text-lg placeholder:text-base"
               placeholder="First name"
@@ -38,7 +38,7 @@ const submitHandler = (data)=>{
 
               <input
               type="text"
-              {...register('lastname')}
+              {...register('lastName')}
               required
               className="bg-[#eeeeee] w-1/2  rounded px-4 py-2 border  text-lg placeholder:text-base"
               placeholder="Last name"

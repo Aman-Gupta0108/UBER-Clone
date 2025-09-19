@@ -9,9 +9,9 @@ const [userData, setUserData] = useState({})
 
 const submitHandler = (data)=>{
     setUserData({
-    username:{
-        firstname:data.firstname,
-        lastname:data.lastname,
+    fullName:{
+        firstName:data.firstName,
+        lastName:data.lastName,
     },
     email:data.email,
     password:data.password
@@ -26,12 +26,12 @@ const submitHandler = (data)=>{
         <div>
            <img className="w-20 mb-3" src="https://www.svgrepo.com/show/505031/uber-driver.svg" alt="" />
           <form onSubmit={handleSubmit(submitHandler)}>
-            <h3 className="text-lg font-medium mb-2 ">What's your name</h3>
+            <h3 className="text-lg font-medium mb-2 ">What's our Caption's name</h3>
 
             <div className="flex gap-4 mb-6">
             <input
               type="text"
-              {...register('firstname')}
+              {...register('firstName')}
               required
               className="bg-[#eeeeee] w-1/2 rounded px-4 py-2 border text-lg placeholder:text-base"
               placeholder="First name"
@@ -39,7 +39,7 @@ const submitHandler = (data)=>{
 
               <input
               type="text"
-              {...register('lastname')}
+              {...register('lastName')}
               required
               className="bg-[#eeeeee] w-1/2  rounded px-4 py-2 border  text-lg placeholder:text-base"
               placeholder="Last name"
@@ -47,7 +47,7 @@ const submitHandler = (data)=>{
 
               </div>
 
-            <h3 className="text-lg font-medium mb-2 ">What's your email</h3>
+            <h3 className="text-lg font-medium mb-2 ">What's our Caption's email</h3>
             <input
               type="email"
               {...register('email')}
