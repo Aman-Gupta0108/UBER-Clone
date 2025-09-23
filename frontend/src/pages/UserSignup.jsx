@@ -1,22 +1,33 @@
-import { useState } from "react";
+import { useState ,useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
+import axios from 'axios'
+import  {UserDataContext} from '../context/UserContext';
 export default function UserSignup() {
+
+const navigate=useNavigate()  
 const { register, handleSubmit } = useForm();
 
-const [userData, setUserData] = useState({})
+const {user,setUser} = useContext(UserDataContext)
 
-const submitHandler = (data)=>{
-    setUserData({
-    userName:{
-        firstName:data.firstName,
-        lastName:data.lastName,
+const submitHandler = async (data)=>{
+  const newUser =  {
+    fullname:{
+        firstname:data.firstName,
+        lastname:data.lastName,
     },
     email:data.email,
     password:data.password
-    })
+    }
 
-
+const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`,newUser)
+if(response.status === 201){
+const data=response.data
+console.log(data)
+setUser(data.user)
+localStorage.setItem('token',data.token)
+navigate('/home')
+}
 
 }
   return (
@@ -66,7 +77,7 @@ const submitHandler = (data)=>{
             />
 
             <button className="bg-[#111] text-[#fff] mb-7 font-semibold rounded px-4 py-2 border w-full text-lg ">
-              Loging
+              Create account
             </button>
           </form>
           <p className="text-center">
