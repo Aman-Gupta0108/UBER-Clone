@@ -6,13 +6,14 @@ const {validationResult} = require('express-validator');
 
 
 module.exports.registerCaptain = async (req, res, next )=>{
+    console.log(req.body)
     const error = validationResult(req);
     if(!error.isEmpty()){
         return res.status(400).json({error:error.array()})
     }
 
     const {fullname, email, password, vehicle} =req.body;
-
+console.log(fullname, email, password, vehicle)
     const isCaptainAlreadyExist = await captainModel.findOne({email})
     if(isCaptainAlreadyExist){
         return res.status(400).json({message:'Captain already exist'})

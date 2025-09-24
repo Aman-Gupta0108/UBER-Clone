@@ -7,6 +7,7 @@ import UserSignup from '../pages/UserSignup'
 import Home from '../pages/Home'
 import UserProtectWrapper from '../pages/UserProtectWrapper'
 import UserLogout from '../pages/UserLogout'
+import CaptainHome from '../pages/CaptainHome'
 export default function Router(){
     return(
         <Routes>
@@ -17,6 +18,7 @@ export default function Router(){
             <Route path='/captain-login' element={<CaptainLogin/>} />
             <Route path='/captain-signup' element={<CaptainSignup/>} />
             <Route path='/user/logout' element={<UserProtectWrapper> <UserLogout/> </UserProtectWrapper>} />
+            <Route path='/captain-home' element={<CaptainHome/>}/>
         </Routes>
     )
 }

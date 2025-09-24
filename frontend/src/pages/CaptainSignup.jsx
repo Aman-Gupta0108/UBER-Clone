@@ -1,24 +1,43 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
+import { CaptainDataContext } from "../context/CapatainContext";
+import React from "react";
+import axios from 'axios'
 
 export default function CaptainSignup() {
+const navigate = useNavigate()
 const { register, handleSubmit } = useForm();
-
 const [userData, setUserData] = useState({})
+const {captain , setCaptain} = React.useContext(CaptainDataContext)
 
-const submitHandler = (data)=>{
-    setUserData({
-    fullName:{
-        firstName:data.firstName,
-        lastName:data.lastName,
+const submitHandler = async (data)=>{
+    
+   const CaptionData = {
+    fullname:{
+        firstname:data.firstName,
+        lastname:data.lastName,
     },
     email:data.email,
-    password:data.password
-    })
+    password:data.password,
+    vehicle:{
+      color:data.vehicleColor,
+      plate:data.vehiclePlate,
+      capacity:data.vehicleCapacity,
+      vehicleType:data.vehicleType
+    }
+    }
 
-
-
+ console.log(CaptionData)
+ console.log(data)
+ const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/captain/register`,CaptionData)
+ console.log(response)
+    if(response.status === 201){
+      const data = response.data
+      setCaptain(data.captain)
+      localStorage.setItem('token',data.token)
+      navigate('/captain-home')
+    }
 }
   return (
     <>
@@ -66,8 +85,52 @@ const submitHandler = (data)=>{
               placeholder="password..."
             />
 
+
+
+
+ <h3 className='text-lg font-medium mb-2'>Vehicle Information</h3>
+          <div className='flex gap-4 mb-7'>
+            <input
+              required
+              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              type="text"
+              placeholder='Vehicle Color'
+              {...register('vehicleColor')}
+            />
+            <input
+              required
+              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              type="text"
+              placeholder='Vehicle Plate'
+             {...register('vehiclePlate')}
+            />
+          </div>
+
+<div className='flex gap-4 mb-7'>
+            <input
+              required
+              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+              type="number"
+              placeholder='Vehicle Capacity'
+             {...register('vehicleCapacity')}
+            />
+            <select
+              required
+              className='bg-[#eeeeee] w-1/2 rounded-lg px-4 py-2 border text-lg placeholder:text-base'
+             {...register('vehicleType')}
+            >
+              <option value="" disabled>Select Vehicle Type</option>
+              <option value="car">Car</option>
+              <option value="auto">Auto</option>
+              <option value="moto">Moto</option>
+            </select>
+          </div>
+
+
+
+
             <button className="bg-[#111] text-[#fff] mb-7 font-semibold rounded px-4 py-2 border w-full text-lg ">
-              Loging
+              Create Captain Account
             </button>
           </form>
           <p className="text-center">
