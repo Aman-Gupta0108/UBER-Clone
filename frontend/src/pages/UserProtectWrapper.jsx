@@ -1,7 +1,7 @@
 import React,{useContext , useEffect ,useState} from "react"
 import UserContext, { UserDataContext } from "../context/UserContext"
 import { useNavigate } from "react-router-dom"
-import axios from axios;
+import axios from 'axios'
 
 
 export default function UserProtectWrapper({children}){
