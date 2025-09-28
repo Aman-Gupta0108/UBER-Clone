@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link ,useNavigate } from "react-router-dom";
-import { CaptainDataContext } from "../context/CapatainContext";
+import { CaptainDataContext } from "../context/CaptainContext";
 import React from "react";
 import axios from 'axios'
 

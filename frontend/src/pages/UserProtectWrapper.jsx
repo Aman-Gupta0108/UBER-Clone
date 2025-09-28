@@ -1,42 +1,52 @@
-import React,{useContext , useEffect ,useState} from "react"
-import UserContext, { UserDataContext } from "../context/UserContext"
-import { useNavigate } from "react-router-dom"
+import React, { useContext, useEffect, useState } from 'react'
+import { UserDataContext } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 
-export default function UserProtectWrapper({children}){
-  
-  const token = localStorage.getItem('token')
-  const navigate = useNavigate()
-  const [ isLoading , setIsLoading ] = useState(true)
-  const {user , setUser} = UserContext(UserDataContext)
 
+const UserProtectWrapper = ({
+    children
+}) => {
+    const token = localStorage.getItem('token')
+    const navigate = useNavigate()
+    const { user, setUser } = useContext(UserDataContext)
+    const [ isLoading, setIsLoading ] = useState(true)
 
-  useEffect(() => {
-    if (!token) {
-      navigate("/login")
+    useEffect(() => {
+        if (!token) {
+            navigate('/login')
+        }
+
+        axios.get(`${import.meta.env.VITE_BASE_URL}/users/profile`, {
+            headers: {
+                Authorization: `Bearer ${token.replace(/"/g, '')}`
+            }
+            // .replace(/"/g, '')  it will replace "" from token 
+        }).then(response => {
+            if (response.status === 200) {
+                setUser(response.data)
+                setIsLoading(false)
+            }
+        })
+            .catch(err => {
+                console.log(err)
+                localStorage.removeItem('token')
+                navigate('/login')
+            })
+    }, [ token ])
+
+    if (isLoading) {
+        return (
+            <div>Loading...</div>
+        )
     }
-  }, [token, navigate])
-   
-axios.get(`${import.meta.env.VITE_BASE_URL}/profile`,{
-  headers:{
-    Authorization:`Bearer ${token}`
-  }
-}).then((response)=>{
-  const data = response.data;
-  setUser(data.user)
-  setIsLoading(false)
-}).catch((err)=>{
-  console.log(err)
-  navigate('/login')
-})
 
-  if(isLoading){
-    <div>Loding...</div>
-  }
- 
-
-    return(<>
-    {children}
-    </>)
+    return (
+        <>
+            {children}
+        </>
+    )
 }
+
+export default UserProtectWrapper

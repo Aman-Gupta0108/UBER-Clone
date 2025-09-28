@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import React, {useState} from 'react'
 import { Link ,useNavigate } from "react-router-dom";
-import { CaptainDataContext } from '../context/CapatainContext'
+import { CaptainDataContext } from '../context/CaptainContext'
 import axios from 'axios'
 export default function CaptainLogin() {
   const navigate = useNavigate()

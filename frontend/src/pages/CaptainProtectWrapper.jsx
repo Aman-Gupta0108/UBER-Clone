@@ -1,5 +1,5 @@
 import React,{useContext , useEffect , useState} from "react"
-import { CaptainDataContext } from "../context/CapatainContext"
+import { CaptainDataContext } from "../context/CaptainContext"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
@@ -32,6 +32,7 @@ export default function CaptainProtectWrapper({children}){
     }
   }).catch(err => {
     console.log(err)
+    localStorage.removeItem('token')
     navigate('/captain-login')
   })
 
