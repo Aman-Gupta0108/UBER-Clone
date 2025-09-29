@@ -83,7 +83,7 @@ captainSchema.statics.hashPassword=async function (password){
 const captainModel = mongoose.model('captain',captainSchema)
  
 
-module.exports = captainModel; 
+module.exports = captainModel;  
 
 
 // ssh-keygen -t ed25519 -C "amangupta.01008@gmail.com"
