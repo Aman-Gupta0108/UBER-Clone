@@ -15,7 +15,8 @@ export default function UserLogin() {
     password:data.password
     }
 
-const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`,userData)
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/login`,userData)
 console.log(response)
   if(response.status === 200){
     setUser(response.data.user)
@@ -23,6 +24,11 @@ console.log(response)
     localStorage.setItem('token',JSON.stringify(response.data.token))
     navigate('/home')
   }
+      
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 
     return (

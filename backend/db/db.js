@@ -8,3 +8,5 @@ function connectToDb(){
 module.exports = connectToDb
 
 // ,{userNewUrlParser:true,useUnifideTopology:true}
+
+//  npm i bcrypt cookie-parse cors dotenv express express-validator jsonwebtoken mongoose 
