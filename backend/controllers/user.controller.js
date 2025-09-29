@@ -29,7 +29,8 @@ module.exports.registerUser = async (req, res, next) => {
       password: hashPassword,
     });
 
-    const token = userModel.generateAuthToken;
+    const token = user.generateAuthToken();
+
     res.status(201).json({ token, user });
   } catch (error) {
     return res.status(500).json({ Error: error.message });

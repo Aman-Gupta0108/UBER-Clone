@@ -20,7 +20,8 @@ const submitHandler = async (data)=>{
     password:data.password
     }
 
-const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`,newUser)
+    try {
+      const response = await axios.post(`${import.meta.env.VITE_BASE_URL}/users/register`,newUser)
 if(response.status === 201){
 const data=response.data
 console.log(data)
@@ -28,6 +29,11 @@ setUser(data.user)
 localStorage.setItem('token',data.token)
 navigate('/home')
 }
+    } catch (error) {
+      console.log(error)
+    }
+
+
 
 }
   return (
