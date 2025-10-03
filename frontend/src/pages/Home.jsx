@@ -6,7 +6,7 @@ import LocationSearchPanel from "../components/LocationSearchPanel";
 import VehiclePanel from "../components/VehiclePanel";
 import ConfirmRide from "../components/ConfirmRide";
 import LookingForDriver from "../components/LookingForDriver";
-
+import WaitingForDriver from "../components/WaitingForDriver";
 export default function Home() {
   const [pickup, setPickup] = useState("");
   const [destination, setDestination] = useState("");
@@ -14,12 +14,14 @@ export default function Home() {
   const vehiclePanelRef = useRef(null);
   const confirmRidePanelRef = useRef(null);
   const vehicleFoundRef = useRef(null);
+  const waitingForDriverRef = useRef(null);
 
   const panelRef = useRef(null);
   const panelCloseRef = useRef(null);
   const [vehiclePanel, setVehiclePanel] = useState(false);
   const [confirmRidePanel,setConfirmRidePanel] = useState(false)
   const [vehicleFound,setVehicleFound] = useState(false)
+  const [waitingForDriver,setWaitingForDriver] = useState(false)
 
 
   const submitHandler = (e) => {
@@ -90,6 +92,20 @@ export default function Home() {
       });
     }
   }, [vehicleFound]);
+
+
+  
+  useGSAP(() => {
+    if (waitingForDriver) {
+      gsap.to(waitingForDriverRef.current, {
+        transform: "translateY(0)",
+      });
+    } else {
+      gsap.to(waitingForDriverRef.current, {
+        transform: "translateY(100%)",
+      });
+    }
+  }, [waitingForDriver]);
 
 
   return (
@@ -170,7 +186,15 @@ export default function Home() {
           ref={vehicleFoundRef}
           className="w-full fixed z-10 bottom-0 translate-y-full px-3 py-6 pt-12 bg-white"
         >
-          <LookingForDriver/>
+          <LookingForDriver setVehicleFound={setVehicleFound} />
+        </div>
+
+        <div
+      ref={waitingForDriverRef}
+          className="w-full fixed z-10 bottom-0  px-3 py-6 pt-12 bg-white"
+        >
+          <WaitingForDriver setWaitingForDriver={setWaitingForDriver} /> 
+          {/* setVehicleFound={setVehicleFound} */}
         </div>
 
       </div>
