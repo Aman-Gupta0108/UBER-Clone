@@ -142,7 +142,7 @@ const submitHandler = async (data)=>{
         <div className="w-full ">
 
          {/* <p className="text-[10px] leading-tight">By proceeding, you consent to get calls, WhatsApp or SMS messages, including by automated means, from Uber and its affiliates to the number provided. </p>  */}
-         <p className="text-[10px] leading-tight">This site is protected by reCaptach and the <span className="underline">Google Privacy Policy</span>and <span className="underline">terms of service apply</span> </p> 
+         <p className="text-[10px] mt-8 leading-tight">This site is protected by reCaptach and the <span className="underline">Google Privacy Policy</span>and <span className="underline">terms of service apply</span> </p> 
         </div>
       </div>
     </>

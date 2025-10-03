@@ -115,7 +115,7 @@ export default function Home() {
           className="w-16 absolute left-5 top-5 "
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/Uber_logo_2018.svg/500px-Uber_logo_2018.svg.png"
           alt=""
-        />
+        /> 
 
         <div
          className="h-screen w-screen ">
